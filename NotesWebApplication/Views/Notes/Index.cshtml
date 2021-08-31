@@ -1,0 +1,52 @@
+﻿@model IEnumerable<NotesWebApplication.Models.Note>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<p>
+    <a class="btn1 btn1-create" asp-action="Create">Create New</a>
+</p>
+<form asp-controller="Notes" asp-action="Index">
+    <p>
+        <input style="float: right" class="btn1 btn1-edit" type="submit" value="Search" />
+    </p>
+    <p>
+        <input style="float: right;" class="form-control col-sm-4" type="text" name="Search" />
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </td>
+                <td class="text-right">
+                    <a class="btn1 btn1-details" asp-action="Details" asp-route-id="@item.Id">View</a>
+                    <a class="btn1 btn1-edit" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn1 btn1-delete" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@*@{
+        var shortDescript = String.Concat(item.Content.Take(30));
+    }
+    @Html.DisplayFor(modelItem => shortDescript)*@
